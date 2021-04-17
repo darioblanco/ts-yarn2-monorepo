@@ -1,0 +1,52 @@
+version: '3.8'
+
+networks:
+  development:
+    driver: bridge
+
+services:
+  db:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_USER=darioblanco
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=development
+    volumes:
+      - ./database/scripts:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+    networks:
+      - development
+    container_name: darioblanco_postgres
+
+  db-integration:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_USER=darioblanco
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=integration
+    ports:
+      - 5433:5432
+    networks:
+      - development
+    container_name: darioblanco_postgres-integration
+
+  redis:
+    image: redis:6-alpine
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    networks:
+      - development
+    container_name: darioblanco_redis
+
+  redis-integration:
+    image: redis:6-alpine
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6380:6379
+    networks:
+      - development
+    container_name: darioblanco_redis-integration

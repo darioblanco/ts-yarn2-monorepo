@@ -1,0 +1,35 @@
+{
+  "name": "@darioblanco/common",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Library for code common to frontend, backend and infrastructure",
+  "keywords": [
+    "library"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/darioblanco/ts-yarn2-monorepo.git",
+    "directory": "packages/shared/common"
+  },
+  "author": "Dario Blanco <dblancoit@gmail.com>",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "directories": {
+    "src": "src",
+    "test": "test"
+  },
+  "files": [
+    "src/**/*"
+  ],
+  "scripts": {
+    "build": "run exec:tsc --build $(pwd)/tsconfig.build.json",
+    "docs": "run exec:typedoc --tsconfig $(pwd)/tsconfig.build.json --out $(pwd)/typedoc $(pwd)/src",
+    "lint": "run exec:eslint --parser-options \"{ tsconfigRootDir: $(pwd), project: '$(pwd)/tsconfig.json' }\" --cache-file $(pwd)/.eslintcache $(pwd)/src $(pwd)/test",
+    "test": "yarn test:unit",
+    "test:unit": "run exec:jest --config $(pwd)/jest.config.js"
+  },
+  "devDependencies": {
+    "@darioblanco/monorepo": "workspace:0.0.0",
+    "@types/jest": "^26.0.22"
+  }
+}
