@@ -11,8 +11,6 @@ services:
       - POSTGRES_USER=darioblanco
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=development
-    volumes:
-      - ./database/scripts:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
     networks:

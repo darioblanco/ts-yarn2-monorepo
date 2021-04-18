@@ -104,7 +104,6 @@ module.exports = {
         '@typescript-eslint/restrict-template-expressions': ['error', { allowAny: true }],
       },
     },
-
     {
       /**
        * React rules
@@ -189,8 +188,9 @@ module.exports = {
       /**
        * JavaScript configuration file rules
        */
-      files: ['**/*.config.{j,t}s?(x)', '**/typedoc.js'],
+      files: ['**/*.config.{j,t}s?(x)', '**/.eslintrc.js', '**/typedoc.js'],
       rules: {
+        '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-var-requires': 'off',
         'node/no-extraneous-require': 'off',
         'node/no-unpublished-require': 'off',

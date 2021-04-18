@@ -62,3 +62,22 @@ appear (defined as a script in `yarn doctor`).
 - `jest.config.js`: sets global Jest configuration to be inherited by each package
 - `tsconfig.json`: global TypeScript configuration to be inherited by each package
 - `typedoc.js`: global TypeDoc configuration to be inherited by each package
+
+## Visual Studio Code
+
+This repository already has pushed the `.yarn/sdks` folder that adapts ESLint, Prettier and
+TypeScript configurations to be used in your IDE, and using project scoped VSCode settings
+(defined in `.vscode/settings.json`). Some manual steps might be needed if you do not
+see those tools working on your editor:
+
+- ESLint
+  - Command + Shift + P in a TypeScript file
+  - Type `ESLint: Select Node Path`
+  - Select `Use NODE_PATH value defined via setting .yarn/sdks`
+- Typescript
+  - Command + Shift + P in a TypeScript file
+  - Type `TypeScript: Select TypeScript Version`
+  - Select `Use Workspace Version`
+
+In addition, it is important to install the VSCode extensions recommended in
+`.vscode/extensions.json`.

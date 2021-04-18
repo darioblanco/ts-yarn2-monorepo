@@ -1,0 +1,66 @@
+name: shared.common
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/shared.common.yaml
+      - packages/shared/common/**
+      - packages/shared/tsconfig.json
+      - package.json
+      - tsconfig.json
+      - types/**/*.ts
+      - '!**.md'
+      - '!**.sh'
+      - '!**/.gitignore'
+    tags:
+      - '@darioblanco/common/*'
+  pull_request:
+    paths:
+      - .github/workflows/shared.common.yaml
+      - packages/shared/common/**
+      - packages/shared/tsconfig.json
+      - package.json
+      - tsconfig.json
+      - types/**/*.ts
+      - '!**.md'
+      - '!**.sh'
+      - '!**/.gitignore'
+  workflow_dispatch:
+
+env:
+  PACKAGE: '@darioblanco/common'
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@master
+      - name: Install node
+        uses: actions/setup-node@master
+        with:
+          node-version: 15.x
+      - name: Install yarn
+        run: yarn
+      - name: Build package
+        run: yarn workspace $PACKAGE build
+      - name: Lint package
+        run: yarn workspace $PACKAGE lint
+      - name: Build package docs
+        run: yarn workspace $PACKAGE docs
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@master
+      - name: Install node
+        uses: actions/setup-node@master
+        with:
+          node-version: 15.x
+      - name: Install yarn
+        run: yarn
+      - name: Run package tests
+        run: yarn workspace $PACKAGE test

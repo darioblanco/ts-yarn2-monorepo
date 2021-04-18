@@ -33,6 +33,9 @@ junit.xml
 ## Typedoc
 typedoc/
 
+## TypeScript
+tsconfig.tsbuildinfo
+
 ## Yarn
 node_modules/
 yarn-debug.log*

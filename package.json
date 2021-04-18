@@ -40,6 +40,7 @@
     "persistence:stop:integration": "docker-compose rm -f -s -v db-integration redis-integration",
     "prettier:fix": "prettier --config .prettierrc --no-editorconfig --write packages/**/*.ts",
     "prettier": "prettier --config .prettierrc --no-editorconfig --check packages/**/*.ts",
+    "postinstall": "husky install",
     "redis:attach:integration": "run exec:docker-compose exec redis-integration redis-cli",
     "redis:attach": "run exec:docker-compose exec redis redis-cli",
     "redis:logs:integration": "yarn exec:docker-compose logs -f redis-integration",
@@ -47,7 +48,6 @@
     "redis:start": "yarn exec:docker-compose up -d --force-recreate redis",
     "redis:start:integration": "run exec:docker-compose up -d --renew-anon-volumes --force-recreate redis-integration",
     "redis:stop:integration": "docker-compose rm -f -s -v redis-integration",
-    "show:coverage": "open .reports/index.html",
     "test:integration": "yarn foreach run test:integration",
     "test:unit": "yarn foreach run test:unit",
     "test": "yarn foreach run test"
@@ -77,7 +77,8 @@
     "ts-node": "^9.1.1",
     "tsconfig-paths": "^3.9.0",
     "typedoc": "^0.20.35",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "webpack": "^5.34.0"
   },
   "workspaces": [
     "packages/frontend/*",

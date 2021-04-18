@@ -1,0 +1,84 @@
+name: backend.cool-service
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/backend.cool-service.yaml
+      - packages/backend/cool-service/**
+      - packages/backend/tsconfig.json
+      - packages/shared/common/**
+      - packages/shared/tsconfig.json
+      - package.json
+      - tsconfig.json
+      - types/**/*.ts
+      - '!**.md'
+      - '!**.sh'
+      - '!**/.gitignore'
+    tags:
+      - '@darioblanco/cool-service/*'
+  pull_request:
+    paths:
+      - .github/workflows/backend.cool-service.yaml
+      - packages/backend/cool-service/**
+      - packages/backend/tsconfig.json
+      - packages/shared/common/**
+      - packages/shared/tsconfig.json
+      - package.json
+      - tsconfig.json
+      - types/**/*.ts
+      - '!**.md'
+      - '!**.sh'
+      - '!**/.gitignore'
+  workflow_dispatch:
+
+env:
+  PACKAGE: '@darioblanco/cool-service'
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@master
+      - name: Install node
+        uses: actions/setup-node@master
+        with:
+          node-version: 15.x
+      - name: Install yarn
+        run: yarn
+      - name: Build package
+        run: yarn workspace $PACKAGE build
+      - name: Lint package
+        run: yarn workspace $PACKAGE lint
+      - name: Build package docs
+        run: yarn workspace $PACKAGE docs
+  test_unit:
+    name: Test Unit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@master
+      - name: Install node
+        uses: actions/setup-node@master
+        with:
+          node-version: 15.x
+      - name: Install yarn
+        run: yarn
+      - name: Run package unit tests
+        run: yarn workspace $PACKAGE test:unit
+  test_integration:
+    name: Test Integration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git repository
+        uses: actions/checkout@master
+      - name: Install node
+        uses: actions/setup-node@master
+        with:
+          node-version: 15.x
+      - name: Install yarn
+        run: yarn
+      - name: Run package integration tests
+        run: yarn workspace $PACKAGE test:integration

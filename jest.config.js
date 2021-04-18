@@ -22,5 +22,5 @@ module.exports = {
     '^.+\\.tsx?$': require.resolve('ts-jest'),
   },
   transformIgnorePatterns: ['/.pnp.js$', '/.pnp.cjs$'],
-  verbose: false,
+  verbose: true,
 };
